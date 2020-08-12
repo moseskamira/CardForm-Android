@@ -35,21 +35,22 @@ public class MainActivity extends AppCompatActivity {
                 .mobileNumberRequired(true)
                 .mobileNumberExplanation("SMS Required On This Number")
                 .setup(MainActivity.this);
+
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 confirmInputData();
             }
         });
-
-
     }
 
     private void confirmInputData() {
+
         if (cardForm.isValid()) {
             alertBuilder.setTitle("Confirm Inputs")
                     .setMessage("CardNumber: "+ cardForm.getCardNumber() + "\n"+
-                            "Card Expiry Date: "+ cardForm.getExpirationMonth()+"/ "+ cardForm.getExpirationYear()+ "\n"+
+                            "Card Expiry Date: "+ cardForm.getExpirationMonth()+"/ "+ cardForm
+                                    .getExpirationYear()+ "\n"+
                             "Card CVV: "+ cardForm.getCvv()+ "\n"+
                             "Postal Code: "+ cardForm.getPostalCode()+ "\n"+
                             "Phone Number: "+ cardForm.getMobileNumber()
@@ -57,23 +58,32 @@ public class MainActivity extends AppCompatActivity {
             alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(MainActivity.this, "Payment Successful", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Payment Successful",
+                            Toast.LENGTH_LONG).show();
 
                 }
             });
             alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(MainActivity.this, "You Canceled Payment", Toast.LENGTH_LONG).show();
-
+                    dialog.dismiss();
+                    Toast.makeText(MainActivity.this, "You Canceled Payment",
+                            Toast.LENGTH_LONG).show();
                 }
             });
 
-            alertBuilder.show();
-
+            showAlertDialog();
 
         }else {
-            Toast.makeText(MainActivity.this, "INVALID INPUT", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "INVALID INPUT", Toast.LENGTH_LONG)
+                    .show();
         }
     }
+
+    private void showAlertDialog() {
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+    }
+
 }
