@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(MainActivity.this, "Payment Successful", Toast.LENGTH_LONG).show();
 
-
                 }
             });
             alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
